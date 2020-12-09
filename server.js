@@ -33,6 +33,7 @@ app.post('/convert', async (req, res) => {
 	const { youtube_url, media_type } = req.body
 	// Based On Media Type Change Extension
 	const filename = await convertYoutubeVideo(youtube_url, media_type)
+	console.log(filename)
 	setTimeout(() => {
 		console.log('hopefull done')
 		res.send(filename)
@@ -49,7 +50,7 @@ app.get('/download', (req, res) => {
 })
 
 app.get('/test', (req, res) => {
-	res.send('hello world');
+	res.send('hello world')
 })
 
 
