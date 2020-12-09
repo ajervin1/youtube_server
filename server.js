@@ -48,11 +48,14 @@ app.get('/download', (req, res) => {
 	res.download(filename)
 })
 
-
+app.get('/test', (req, res) => {
+	res.send('hello world');
+})
 
 
 
 // Server Start
-app.listen(4000, () => {
+const port = process.env.PORT || 4000
+app.listen(port, () => {
 	console.log('server listening')
 })
