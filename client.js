@@ -1,17 +1,14 @@
-const axios = require('axios')
-axios.defaults.adapter = require('axios/lib/adapters/http')
+const fs = require('fs')
 
-// Convert Url
-async function convertUrl (url) {
-	try {
-		const { data } = await axios.post('http://localhost:4000/convert', { youtube_url: url })
-		console.log(data)
-	} catch (e) {
-		console.log(e)
-	}
+const ytdl = require('ytdl-core')
+
+
+
+async function main () {
+	const youtube_url = 'https://www.youtube.com/watch?v=J19MThzOLfY'
+	const info = await ytdl.getInfo(youtube_url);
+	console.log(info.videoDetails)
+	
 }
-
-// Download
-
 
 

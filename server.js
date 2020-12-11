@@ -1,7 +1,7 @@
 //  Imports
 const ytdl = require('ytdl-core')
 const fs = require('fs')
-const { convertYoutubeVideo } = require('./youtubeservice')
+const { convertAudio, convertVideo } = require('./youtubeservice')
 const path = require('path')
 const express = require('express')
 const app = express()
@@ -32,12 +32,13 @@ app.use(session({
 app.post('/convert', async (req, res) => {
 	const { youtube_url, media_type } = req.body
 	// Based On Media Type Change Extension
-	const filename = await convertYoutubeVideo(youtube_url, media_type)
-	console.log(filename)
-	setTimeout(() => {
-		console.log('hopefull done')
-		res.send(filename)
-	}, 3000)
+	if (media_type == 'audio') {
+		const filename = await convertAudio(youtube_url)
+		res.send({ filename })
+	} else {
+		const filename = await convertVideo(youtube_url)
+		res.send({ filename })
+	}
 })
 
 // Download File
