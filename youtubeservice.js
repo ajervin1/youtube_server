@@ -4,7 +4,7 @@ const ytdl = require('ytdl-core')
 
 
 // Convert Video
- async function convertVideo (youtubeurl) {
+async function convertVideo (youtubeurl) {
 	// Get All Video Info
 	const info = await ytdl.getInfo(youtubeurl)
 	const readable = ytdl.downloadFromInfo(info)
@@ -31,7 +31,7 @@ async function convertAudio (youtubeurl) {
 		filter: 'audioonly',
 		quality: 'highestaudio'
 	})
-	let filename = info.videoDetails.title.slice(0, 10) + '.mp3'
+	let filename = info.videoDetails.title.slice(0, 10) + '.m4a'
 	filename = filename.trim()
 	const ws = fs.createWriteStream(filename)
 	readable.pipe(ws)
