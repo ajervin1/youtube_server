@@ -31,7 +31,7 @@ async function convertAudio (youtubeurl) {
 		filter: 'audioonly',
 		quality: 'highestaudio'
 	})
-	let filename = info.videoDetails.title.slice(0, 10) + '.m4a'
+	let filename = info.videoDetails.title.slice(0, 10) + '.mp4a'
 	filename = filename.trim()
 	const ws = fs.createWriteStream(filename)
 	readable.pipe(ws)
@@ -44,6 +44,11 @@ async function convertAudio (youtubeurl) {
 	return promise
 }
 
+async function run (youtubeurl) {
+	const info = await ytdl.getInfo(youtubeurl)
+	let audioFormats = ytdl.filterFormats(info.formats, 'audio')
+	console.log(audioFormats)
+}
 
 
 
