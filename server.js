@@ -18,15 +18,12 @@ const session = require('express-session')
 app.use(express.static('./'))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
-
 app.use(morgan('dev'))
 app.use(cors())
 app.use(session({
 	secret: 'password'
 }))
 // Routes
-
-
 // Convert Url and Write File To Disk
 // First Convert Url
 app.post('/convert', async (req, res) => {
@@ -51,7 +48,7 @@ app.get('/download', (req, res) => {
 })
 
 app.get('/test', (req, res) => {
-	res.send('hello world')
+	res.send('this is a test')
 })
 
 
