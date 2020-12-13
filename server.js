@@ -57,6 +57,11 @@ app.get('/test', (req, res) => {
 })
 
 
+app.get('/', (req, res) => {
+	res.send('hello world')
+})
+
+
 
 // Server Start
 const port = process.env.PORT || 4000
