@@ -8,9 +8,9 @@ const app = express()
 const cors = require('cors')
 const morgan = require('morgan')
 const session = require('express-session')
-// Mongoose
+const FileType = require('file-type')
 
-
+var ffmpeg = require('ffmpeg')
 
 
 //  Middleware
@@ -30,9 +30,14 @@ app.post('/convert', async (req, res) => {
 	const { youtube_url, media_type } = req.body
 	// Based On Media Type Change Extension
 	if (media_type == 'audio') {
-		const filename = await convertAudio(youtube_url)
-		res.send({ filename })
+		// Convert Audio
+		const filename = await convertVideo(youtube_url)
+		const audiofile = filename.replace('mp4', 'mp3')
+		const video = await new ffmpeg(filename)
+		const audio = await video.fnExtractSoundToMP3(audiofile)
+		res.send({ filename: audiofile })
 	} else {
+		// Convert Video
 		const filename = await convertVideo(youtube_url)
 		res.send({ filename })
 	}
@@ -48,7 +53,7 @@ app.get('/download', (req, res) => {
 })
 
 app.get('/test', (req, res) => {
-	res.send('this is a test')
+	res.send('this is a third test')
 })
 
 
